@@ -15,6 +15,9 @@ public class LoginPage {
     @FindBy(id = "login-button")
     private SelenideElement loginButton;
 
+    @FindBy(css = "h3[data-test='error']")
+    private SelenideElement badCredsMessage;
+
     public ProductsPage login(){
         //TODO: use data provider for users.
         Wait().until(webDriver -> usernameField.isDisplayed());
@@ -22,6 +25,10 @@ public class LoginPage {
         passwordField.sendKeys("secret_sauce");
         loginButton.click();
         return page(ProductsPage.class);
+    }
+
+    public String getBadCredsMsg(){
+        return badCredsMessage.text();
     }
 
 }
