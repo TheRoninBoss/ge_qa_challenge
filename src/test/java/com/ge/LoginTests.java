@@ -8,10 +8,10 @@ import org.testng.annotations.Test;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 
-public class SauceDemoTest {
+public class LoginTests {
 
-    @Test
-    public void test() {
+//    @Test
+    public void loginTest() {
         open("https://www.saucedemo.com/");
         ProductsPage productsPage = page(LoginPage.class).login();
         Assert.assertEquals(productsPage.getTitle(), "PRODUCTS");
