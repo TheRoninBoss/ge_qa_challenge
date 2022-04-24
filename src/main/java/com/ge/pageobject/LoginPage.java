@@ -18,11 +18,11 @@ public class LoginPage {
     @FindBy(css = "h3[data-test='error']")
     private SelenideElement badCredsMessage;
 
-    public ProductsPage login(){
+    public ProductsPage login(String username, String password){
         //TODO: use data provider for users.
         Wait().until(webDriver -> usernameField.isDisplayed());
-        usernameField.sendKeys("standard_user");
-        passwordField.sendKeys("secret_sauce");
+        usernameField.sendKeys(username);
+        passwordField.sendKeys(password);
         loginButton.click();
         return page(ProductsPage.class);
     }
