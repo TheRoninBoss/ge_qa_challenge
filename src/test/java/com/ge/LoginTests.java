@@ -21,7 +21,7 @@ public class LoginTests extends BaseTest{
     }
 
     @Test
-    public void unauthorizedUserTest() throws InterruptedException {
+    public void unauthorizedUserTest() {
         LoginPage loginPage = page(LoginPage.class);
         loginPage.login("not_an_user", "secret_sauce");
         String errorMsg = loginPage.getBadCredsMsg();
