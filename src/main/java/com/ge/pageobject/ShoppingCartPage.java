@@ -1,4 +1,4 @@
 package com.ge.pageobject;
 
-public class ShoppingCartPage extends BasePage {
+public class ShoppingCartPage extends AbstractBasePage {
 }

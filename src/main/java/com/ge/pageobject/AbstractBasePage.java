@@ -3,7 +3,7 @@ package com.ge.pageobject;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 
-public abstract class BasePage {
+public abstract class AbstractBasePage {
 
     @FindBy(id = "react-burger-menu-btn")
     private SelenideElement burgerMenuButton;
@@ -14,7 +14,7 @@ public abstract class BasePage {
     @FindBy(className = "title")
     private SelenideElement title;
 
-    public String getTitle(){
+    public String getTitle() {
         return title.text();
     }
 }

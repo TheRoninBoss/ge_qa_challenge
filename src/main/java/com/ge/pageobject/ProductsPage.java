@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class ProductsPage extends BasePage {
+public class ProductsPage extends AbstractBasePage {
 
     @FindBy(className = "inventory_item")
     private List<InventoryItem> inventoryItems;
