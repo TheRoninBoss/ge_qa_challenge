@@ -14,11 +14,10 @@ public class LoginPage {
     private SelenideElement passwordField;
     @FindBy(id = "login-button")
     private SelenideElement loginButton;
-
     @FindBy(css = "h3[data-test='error']")
     private SelenideElement badCredsMessage;
 
-    public ProductsPage login(String username, String password){
+    public ProductsPage login(String username, String password) {
         //TODO: use data provider for users.
         Wait().until(webDriver -> usernameField.isDisplayed());
         usernameField.sendKeys(username);
@@ -27,7 +26,7 @@ public class LoginPage {
         return page(ProductsPage.class);
     }
 
-    public String getBadCredsMsg(){
+    public String getBadCredsMsg() {
         return badCredsMessage.text();
     }
 
