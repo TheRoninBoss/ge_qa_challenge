@@ -3,20 +3,30 @@ package com.ge.pageobject;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Currency;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Locale.US;
 
 public class ProductsPage extends AbstractBasePage {
 
     @FindBy(className = "inventory_item")
     private List<InventoryItem> inventoryItems;
 
-    @FindBy(className = "select_container")
+    @FindBy(className = "product_sort_container")
     private SelenideElement filterDropdown;
 
     public ProductsPage sortInventory(SortOrder desiredOrder) {
-        //TODO: First check what's the current sort order.
-        filterDropdown.selectOptionContainingText(desiredOrder.textValue);
+        filterDropdown.selectOptionContainingText(
+                desiredOrder.textValue);
         return this;
+    }
+
+    public List<Double> getPriceList() {
+        return inventoryItems.stream()
+                .map(item -> item.getPrice())
+                .collect(Collectors.toList());
     }
 
     public enum SortOrder {
@@ -35,10 +45,16 @@ public class ProductsPage extends AbstractBasePage {
 
         @FindBy(className = "inventory_item_name")
         private SelenideElement inventoryItemNameLabel;
-
+        @FindBy(className = "inventory_item_price")
+        private SelenideElement inventoryItemPriceLabel;
         @FindBy(className = "btn_inventory")
         private SelenideElement inventoryButton;
 
+        Double getPrice() {
+            String currencySymbol = Currency.getInstance(US).getSymbol();
+            return Double.valueOf(
+                    inventoryItemPriceLabel.text().replace(currencySymbol, ""));
+        }
     }
 
 }
