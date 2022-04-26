@@ -11,16 +11,16 @@ import static com.codeborne.selenide.Selenide.page;
 public abstract class AbstractBasePage {
 
     @FindBy(id = "react-burger-menu-btn")
-    private SelenideElement burgerMenuButton;
+    protected SelenideElement burgerMenuButton;
 
     @FindBy(id = "shopping_cart_container")
-    private SelenideElement shoppingCartButton;
+    protected SelenideElement shoppingCartButton;
 
     @FindBy(className = "bm-menu")
-    private BurgerMenu burgerMenu;
+    protected BurgerMenu burgerMenu;
 
     @FindBy(className = "title")
-    private SelenideElement title;
+    protected SelenideElement title;
 
     public String getTitle() {
         return title.text();
@@ -30,6 +30,11 @@ public abstract class AbstractBasePage {
         burgerMenuButton.click();
         burgerMenu.logout();
         return page(LoginPage.class);
+    }
+
+    public ShoppingCartPage viewCart() {
+        shoppingCartButton.click();
+        return page(ShoppingCartPage.class);
     }
 
     public enum BurgerMenuOptions {

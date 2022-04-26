@@ -3,8 +3,10 @@ package com.ge.pageobject;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Arrays;
 import java.util.Currency;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static java.util.Locale.US;
@@ -25,8 +27,17 @@ public class ProductsPage extends AbstractBasePage {
 
     public List<Double> getPriceList() {
         return inventoryItems.stream()
-                .map(item -> item.getPrice())
+                .map(InventoryItem::getPrice)
                 .collect(Collectors.toList());
+    }
+
+    public ProductsPage addProductsToCart(String... productLabels) {
+        Predicate<InventoryItem> predicate =
+                item -> Arrays.asList(productLabels)
+                        .contains(item.inventoryItemNameLabel.text());
+        inventoryItems.stream().filter(predicate).forEach(
+                InventoryItem::addToCart);
+        return this;
     }
 
     public enum SortOrder {
@@ -43,6 +54,8 @@ public class ProductsPage extends AbstractBasePage {
 
     static class InventoryItem extends AbstractPageFragment {
 
+        private static String ADD_TO_CART = "ADD TO CART";
+        private static String REMOVE = "REMOVE";
         @FindBy(className = "inventory_item_name")
         private SelenideElement inventoryItemNameLabel;
         @FindBy(className = "inventory_item_price")
@@ -54,6 +67,18 @@ public class ProductsPage extends AbstractBasePage {
             String currencySymbol = Currency.getInstance(US).getSymbol();
             return Double.valueOf(
                     inventoryItemPriceLabel.text().replace(currencySymbol, ""));
+        }
+
+        void addToCart() {
+            if (inventoryButton.text().equals(ADD_TO_CART)) {
+                inventoryButton.click();
+            }
+        }
+
+        void removeFromCart() {
+            if (inventoryButton.text().equals(REMOVE)) {
+                inventoryButton.click();
+            }
         }
     }
 
