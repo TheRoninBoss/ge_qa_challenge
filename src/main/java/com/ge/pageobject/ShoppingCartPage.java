@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.codeborne.selenide.Selenide.page;
+
 public class ShoppingCartPage extends AbstractBasePage {
 
     @FindBy(className = "cart_item")
@@ -18,6 +20,11 @@ public class ShoppingCartPage extends AbstractBasePage {
                 .map(item -> item.inventoryItemNameLabel.text())
                 .collect(
                         Collectors.toList());
+    }
+
+    public CheckoutPage checkout() {
+        checkoutButton.click();
+        return page(CheckoutPage.class);
     }
 
     static class CartItem extends AbstractPageFragment {
