@@ -10,13 +10,13 @@ public abstract class BaseTest {
 
     protected LoginPage loginPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setUp() {
         open("https://www.saucedemo.com/");
         loginPage = page(LoginPage.class);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         closeWebDriver();
     }

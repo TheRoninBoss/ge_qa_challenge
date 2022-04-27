@@ -13,21 +13,21 @@ public class LoginTests extends BaseTest {
             "Epic sadface: Username and password do not match any user in this service";
 
 
-    @Test
+    @Test(groups = {"all", "loginTest"})
     public void loginTest() {
         ProductsPage productsPage =
                 loginPage.login("standard_user", "secret_sauce");
         assertEquals(productsPage.getTitle(), "PRODUCTS");
     }
 
-    @Test
+    @Test(groups = {"all", "unauthorizedUserTest"})
     public void unauthorizedUserTest() {
         loginPage.login("not_an_user", "secret_sauce");
         String errorMsg = loginPage.getBadCredsMsg();
         assertEquals(errorMsg, BAD_CREDS_ERROR_MSG);
     }
 
-    @Test
+    @Test(groups = {"all", "logoutTest"})
     public void logoutTest() {
         loginPage.login("standard_user", "secret_sauce")
                 .logout();

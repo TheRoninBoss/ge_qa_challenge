@@ -7,7 +7,7 @@ import static org.testng.Assert.assertEquals;
 
 public class CheckoutTests extends BaseTest {
 
-    @Test
+    @Test(groups = {"all", "completePurchaseTest"})
     public void completePurchaseTest() {
         ConfirmationPage confirmationPage =
                 loginPage

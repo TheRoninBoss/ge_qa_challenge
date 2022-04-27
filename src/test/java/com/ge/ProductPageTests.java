@@ -14,7 +14,7 @@ import static org.testng.Assert.assertTrue;
 
 public class ProductPageTests extends BaseTest {
 
-    @Test
+    @Test(groups = {"all", "sortProductsByPriceTest"})
     public void sortProductsByPriceTest() {
         ProductsPage productsPage =
                 loginPage.login("standard_user", "secret_sauce");
@@ -29,7 +29,7 @@ public class ProductPageTests extends BaseTest {
         assertTrue(sorted);
     }
 
-    @Test
+    @Test(groups = {"all", "addMultipleItemsToCartTest"})
     public void addMultipleItemsToCartTest() {
         ProductsPage productsPage =
                 loginPage.login("standard_user", "secret_sauce");
@@ -44,7 +44,7 @@ public class ProductPageTests extends BaseTest {
         Assert.assertEqualsNoOrder(itemsInCart, Arrays.asList(products));
     }
 
-    @Test
+    @Test(groups = {"all", "addSpecificItemToCartTest"})
     public void addSpecificItemToCartTest() {
         ProductsPage productsPage =
                 loginPage.login("standard_user", "secret_sauce");
