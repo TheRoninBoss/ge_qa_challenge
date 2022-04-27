@@ -1,6 +1,5 @@
 package com.ge;
 
-import com.ge.pageobject.LoginPage;
 import com.ge.pageobject.ProductsPage;
 import com.google.common.collect.Ordering;
 import org.testng.Assert;
@@ -9,7 +8,6 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.page;
 import static com.ge.pageobject.ProductsPage.SortOrder.PRICE_LOW_TO_HIGH;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -19,7 +17,7 @@ public class ProductPageTests extends BaseTest {
     @Test
     public void sortProductsByPriceTest() {
         ProductsPage productsPage =
-                page(LoginPage.class).login("standard_user", "secret_sauce");
+                loginPage.login("standard_user", "secret_sauce");
 
         boolean notSorted =
                 Ordering.natural().isOrdered(productsPage.getPriceList());
@@ -34,7 +32,7 @@ public class ProductPageTests extends BaseTest {
     @Test
     public void addMultipleItemsToCartTest() {
         ProductsPage productsPage =
-                page(LoginPage.class).login("standard_user", "secret_sauce");
+                loginPage.login("standard_user", "secret_sauce");
         final String[] products =
                 {"Test.allTheThings() T-Shirt (Red)", "Sauce Labs Bolt T-Shirt", "Sauce Labs Bike Light"};
 
@@ -49,7 +47,7 @@ public class ProductPageTests extends BaseTest {
     @Test
     public void addSpecificItemToCartTest() {
         ProductsPage productsPage =
-                page(LoginPage.class).login("standard_user", "secret_sauce");
+                loginPage.login("standard_user", "secret_sauce");
         final String item = "Sauce Labs Onesie";
 
         var itemsInCart = productsPage

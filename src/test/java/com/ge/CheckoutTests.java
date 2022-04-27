@@ -1,10 +1,8 @@
 package com.ge;
 
 import com.ge.pageobject.ConfirmationPage;
-import com.ge.pageobject.LoginPage;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Selenide.page;
 import static org.testng.Assert.assertEquals;
 
 public class CheckoutTests extends BaseTest {
@@ -12,7 +10,7 @@ public class CheckoutTests extends BaseTest {
     @Test
     public void completePurchaseTest() {
         ConfirmationPage confirmationPage =
-                page(LoginPage.class)
+                loginPage
                         .login("standard_user", "secret_sauce")
                         .addProductsToCart("Test.allTheThings() T-Shirt (Red)",
                                 "Sauce Labs Bolt T-Shirt")

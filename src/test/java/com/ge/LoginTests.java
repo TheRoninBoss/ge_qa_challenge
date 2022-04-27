@@ -1,10 +1,8 @@
 package com.ge;
 
-import com.ge.pageobject.LoginPage;
 import com.ge.pageobject.ProductsPage;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Selenide.page;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -18,13 +16,12 @@ public class LoginTests extends BaseTest {
     @Test
     public void loginTest() {
         ProductsPage productsPage =
-                page(LoginPage.class).login("standard_user", "secret_sauce");
+                loginPage.login("standard_user", "secret_sauce");
         assertEquals(productsPage.getTitle(), "PRODUCTS");
     }
 
     @Test
     public void unauthorizedUserTest() {
-        LoginPage loginPage = page(LoginPage.class);
         loginPage.login("not_an_user", "secret_sauce");
         String errorMsg = loginPage.getBadCredsMsg();
         assertEquals(errorMsg, BAD_CREDS_ERROR_MSG);
@@ -32,10 +29,8 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void logoutTest() {
-        LoginPage loginPage =
-                page(LoginPage.class)
-                        .login("standard_user", "secret_sauce")
-                        .logout();
+        loginPage.login("standard_user", "secret_sauce")
+                .logout();
         assertNotNull(loginPage);
     }
 }
