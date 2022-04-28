@@ -8,29 +8,37 @@ import static org.testng.Assert.assertNotNull;
 
 public class LoginTests extends BaseTest {
 
-    //TODO: use data provider.
-    private static final String BAD_CREDS_ERROR_MSG =
-            "Epic sadface: Username and password do not match any user in this service";
-
-
     @Test(groups = {"all", "loginTest"})
     public void loginTest() {
+        String username = testData.getStandardUserName();
+        String password = testData.getValidPassword();
+
         ProductsPage productsPage =
-                loginPage.login("standard_user", "secret_sauce");
+                loginPage.login(username, password);
+
         assertEquals(productsPage.getTitle(), "PRODUCTS");
     }
 
     @Test(groups = {"all", "unauthorizedUserTest"})
     public void unauthorizedUserTest() {
-        loginPage.login("not_an_user", "secret_sauce");
-        String errorMsg = loginPage.getBadCredsMsg();
-        assertEquals(errorMsg, BAD_CREDS_ERROR_MSG);
+        String username = testData.getStandardUserName();
+        String invalidPassword = testData.getInvalidPassword();
+        String expectedErrorMsg = testData.getIncorrectLoginErrorMessage();
+
+        loginPage.login(username, invalidPassword);
+        String actualErrorMsg = loginPage.getBadCredsMsg();
+        
+        assertEquals(actualErrorMsg, expectedErrorMsg);
     }
 
     @Test(groups = {"all", "logoutTest"})
     public void logoutTest() {
-        loginPage.login("standard_user", "secret_sauce")
+        String username = testData.getStandardUserName();
+        String password = testData.getValidPassword();
+
+        loginPage.login(username, password)
                 .logout();
+
         assertNotNull(loginPage);
     }
 }
