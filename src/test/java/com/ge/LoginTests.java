@@ -9,8 +9,9 @@ import static org.testng.Assert.assertNotNull;
 
 public class LoginTests extends BaseTest {
 
-    private String invalidPassword = TEST_DATA.getInvalidPassword();
-    private String expectedErrorMsg = TEST_DATA.getIncorrectLoginErrorMessage();
+    private final String invalidPassword = TEST_DATA.getInvalidPassword();
+    private final String expectedErrorMsg =
+            TEST_DATA.getIncorrectLoginErrorMessage();
 
     @Test(groups = {"all", "loginTest"})
     public void loginTest() {
