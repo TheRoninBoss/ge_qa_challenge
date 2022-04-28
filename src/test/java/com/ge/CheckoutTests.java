@@ -9,21 +9,27 @@ public class CheckoutTests extends BaseTest {
 
     @Test(groups = {"all", "completePurchaseTest"})
     public void completePurchaseTest() {
+        final String testTShirt = TEST_DATA.getTestProductOne();
+        final String boltTShirt = TEST_DATA.getTestProductTwo();
+        final String customerName = TEST_DATA.getCustomerFirstName();
+        final String customerLastName = TEST_DATA.getCustomerLastName();
+        final String customerPostalCode = TEST_DATA.getCuctomerPostalCode();
+        final String expectedTitle = TEST_DATA.getConfirmationPageTitle();
+
         ConfirmationPage confirmationPage =
                 loginPage
-                        .login("standard_user", "secret_sauce")
-                        .addProductsToCart("Test.allTheThings() T-Shirt (Red)",
-                                "Sauce Labs Bolt T-Shirt")
+                        .login(standardUserName, password)
+                        .addProductsToCart(testTShirt, boltTShirt)
                         .viewCart()
                         .checkout()
-                        .fillFirstName("Eduardo")
-                        .fillLastName("Enciso")
-                        .fillPostalCode("03012")
+                        .fillFirstName(customerName)
+                        .fillLastName(customerLastName)
+                        .fillPostalCode(customerPostalCode)
                         .continueToOverview()
                         .completePurchase();
         String confirmationTitle = confirmationPage.getTitle();
 
-        assertEquals(confirmationTitle, "CHECKOUT: COMPLETE!");
+        assertEquals(confirmationTitle, expectedTitle);
     }
 
 }

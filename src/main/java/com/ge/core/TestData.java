@@ -9,7 +9,7 @@ import java.util.Properties;
 public class TestData {
 
     private static final String NULL_PROPERTY_ERROR =
-            "- Property [%s] was not found! Check for typos!";
+            "- Property [%s] was not found! Check your spelling!";
     private static TestData instance;
     private Properties properties;
 
@@ -63,5 +63,36 @@ public class TestData {
         return getProperty("incorrect_login_error_msg");
     }
 
+    public String getTestProductOne() {
+        return getProperty("product_1");
+    }
+
+    public String getTestProductTwo() {
+        return getProperty("product_2");
+    }
+
+    public String getTestProductThree() {
+        return getProperty("product_3");
+    }
+
+    public String getTestProductOnesie() {
+        return getProperty("product_onesie");
+    }
+
+    public String getCustomerFirstName() {
+        return getProperty("first_name");
+    }
+
+    public String getCustomerLastName() {
+        return getProperty("last_name");
+    }
+
+    public String getCuctomerPostalCode() {
+        return getProperty("postal_code");
+    }
+
+    public String getConfirmationPageTitle() {
+        return getProperty("confirmation_title");
+    }
 
 }

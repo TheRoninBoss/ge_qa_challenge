@@ -1,5 +1,6 @@
 package com.ge;
 
+import com.ge.pageobject.LoginPage;
 import com.ge.pageobject.ProductsPage;
 import org.testng.annotations.Test;
 
@@ -8,37 +9,31 @@ import static org.testng.Assert.assertNotNull;
 
 public class LoginTests extends BaseTest {
 
+    private String invalidPassword = TEST_DATA.getInvalidPassword();
+    private String expectedErrorMsg = TEST_DATA.getIncorrectLoginErrorMessage();
+
     @Test(groups = {"all", "loginTest"})
     public void loginTest() {
-        String username = testData.getStandardUserName();
-        String password = testData.getValidPassword();
-
         ProductsPage productsPage =
-                loginPage.login(username, password);
+                loginPage.login(standardUserName, password);
 
         assertEquals(productsPage.getTitle(), "PRODUCTS");
     }
 
     @Test(groups = {"all", "unauthorizedUserTest"})
     public void unauthorizedUserTest() {
-        String username = testData.getStandardUserName();
-        String invalidPassword = testData.getInvalidPassword();
-        String expectedErrorMsg = testData.getIncorrectLoginErrorMessage();
-
-        loginPage.login(username, invalidPassword);
+        loginPage.login(standardUserName, invalidPassword);
         String actualErrorMsg = loginPage.getBadCredsMsg();
-        
+
         assertEquals(actualErrorMsg, expectedErrorMsg);
     }
 
     @Test(groups = {"all", "logoutTest"})
     public void logoutTest() {
-        String username = testData.getStandardUserName();
-        String password = testData.getValidPassword();
-
-        loginPage.login(username, password)
+        LoginPage expectedPage = loginPage
+                .login(standardUserName, password)
                 .logout();
 
-        assertNotNull(loginPage);
+        assertNotNull(expectedPage);
     }
 }

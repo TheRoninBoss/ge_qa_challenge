@@ -9,12 +9,14 @@ import static com.codeborne.selenide.Selenide.*;
 
 public abstract class BaseTest {
 
+    protected static final TestData TEST_DATA = TestData.getInstance();
+    protected final String standardUserName = TEST_DATA.getStandardUserName();
+    protected final String password = TEST_DATA.getValidPassword();
     protected LoginPage loginPage;
-    protected TestData testData = TestData.getInstance();
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
-        open(testData.getBaseUrl());
+        open(TEST_DATA.getBaseUrl());
         loginPage = page(LoginPage.class);
     }
 

@@ -17,7 +17,7 @@ public class ProductPageTests extends BaseTest {
     @Test(groups = {"all", "sortProductsByPriceTest"})
     public void sortProductsByPriceTest() {
         ProductsPage productsPage =
-                loginPage.login("standard_user", "secret_sauce");
+                loginPage.login(standardUserName, password);
 
         boolean notSorted =
                 Ordering.natural().isOrdered(productsPage.getPriceList());
@@ -31,10 +31,13 @@ public class ProductPageTests extends BaseTest {
 
     @Test(groups = {"all", "addMultipleItemsToCartTest"})
     public void addMultipleItemsToCartTest() {
+        final String testTShirt = TEST_DATA.getTestProductOne();
+        final String boltTShirt = TEST_DATA.getTestProductTwo();
+        final String bikeLight = TEST_DATA.getTestProductThree();
+
         ProductsPage productsPage =
-                loginPage.login("standard_user", "secret_sauce");
-        final String[] products =
-                {"Test.allTheThings() T-Shirt (Red)", "Sauce Labs Bolt T-Shirt", "Sauce Labs Bike Light"};
+                loginPage.login(standardUserName, password);
+        final String[] products = {testTShirt, boltTShirt, bikeLight};
 
         var itemsInCart = productsPage
                 .addProductsToCart(products)
@@ -46,10 +49,10 @@ public class ProductPageTests extends BaseTest {
 
     @Test(groups = {"all", "addSpecificItemToCartTest"})
     public void addSpecificItemToCartTest() {
+        final String item = TEST_DATA.getTestProductOnesie();
         ProductsPage productsPage =
-                loginPage.login("standard_user", "secret_sauce");
-        final String item = "Sauce Labs Onesie";
-
+                loginPage.login(standardUserName, password);
+        
         var itemsInCart = productsPage
                 .addProductsToCart(item)
                 .viewCart()
