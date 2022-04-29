@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MyTestSuite">
+    <test name="GETests">
+        <parameter name="browser" value="chrome"/>
+        <groups>
+            <run>
+                <include name="all"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.ge.LoginTests"/>
+            <class name="com.ge.ProductPageTests"/>
+            <class name="com.ge.CheckoutTests"/>
+        </classes>
+    </test>
+</suite>
