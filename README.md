@@ -22,5 +22,4 @@ First you must have maven installed then:
 
 ## Test execution report
 
-After test are executed, the report can be found
-in [target/surefire-reports/TestSuite/GETests.html](target/surefire-reports/TestSuite/GETests.html)
+After test are executed, run `mvn allure:serve`. The test execution report will then be opened in a browser window.
